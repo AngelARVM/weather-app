@@ -1,31 +1,18 @@
 import React, {Fragment, useState} from 'react'
+import {Switch, Route} from 'react-router-dom'
 import '../css/App.css';
-
+import Nav from '../components/Nav'
 import Cards from '../components/Cards'
+import City from '../components/City'
+import About from '../components/About'
+
 
 function App() {
-  const newCity = {
-    min: "10",
-    max: "20",
-    img: "01d",
-    id: 800,
-    wind: "1.5",
-    temp: "16",
-    name: "Oslo",
-    weather: "clear",
-    clouds: "1",
-    latitud: "37.39",
-    longitud: "-122.08"
-  }
-
-  const [cities, setCities] = useState([newCity])
-
-  
-
+  const [cities, setCities] = useState([])
   const apiKey = "c56858acc8d7a3be4849d5896038f853"
 
+
   function onSearch(city) {
-    
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
     .then((data) => {
@@ -43,7 +30,6 @@ function App() {
           latitud: data.coord.lat,
           longitud: data.coord.lon
         }
-
         if ( cities.some(e => e.name === newCity.name)){
           alert('City is already on the panel')
         } else {
@@ -59,13 +45,32 @@ function App() {
     setCities(oldCities => oldCities.filter(city => city.id !== id))
   }
 
-  
-  
+  function onFilter(cityId) {
+    let city = cities.filter(c => c.id === parseInt(cityId));
+    console.log('onFilter:', city)
+    if(city.length > 0) {
+        return city[0];
+    } else {
+        return null;
+    }
+  }
 
   return (
     <Fragment>
       <div className="App">
-        <Cards cities={cities} onClose={onClose}/>
+        <Nav onSearch={onSearch}/>
+        
+        <Switch>
+          <Route exact path="/">
+            <Cards cities={cities} onClose={onClose}/>
+          </Route>
+          <Route exact path='/city/:id' render={({match}) => <City city={onFilter(match.params.id)}/>}/>
+          <Route>
+            <About exact path="/about" />
+          </Route>
+          
+        </Switch>
+
       </div>
     </Fragment>
   );
