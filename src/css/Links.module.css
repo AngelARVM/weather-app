@@ -10,7 +10,7 @@
 }
 
 .links ul li a{
-    color: black;
+    color: var(--color-font);
     font-weight: bold;
     text-decoration: none;
     border-bottom: 1px solid black;

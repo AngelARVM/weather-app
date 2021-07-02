@@ -6,13 +6,6 @@ import '../css/global.css'
 const SearchBar = (props) => {
     //input state will contain input value
     const [input, setInput] = useState("")
-    const [dark, setDark] = useState(false)
-
-    function handleSwitch () {
-        setDark(!dark)
-    }
-
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,8 +24,8 @@ const SearchBar = (props) => {
         <Fragment>
             <div className={styles.searchBar}>
                 <div className={styles.switch}>
-                    <input type="checkbox" checked={dark} readOnly/>
-                    <span className={`${styles.slider} ${styles.round}`} onClick={handleSwitch}></span>
+                    <input type="checkbox" checked={props.darkMode} readOnly/>
+                    <span className={`${styles.slider} ${styles.round}`} onClick={props.onSwitch}></span>
                 </div>
                 <div className={styles.search}>
                     <form onSubmit={handleSubmit}> 

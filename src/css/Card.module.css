@@ -2,6 +2,7 @@
     width:100%;
     max-width: 300px;
     margin: 2rem 0;
+    background: var(--color-sec);
     border: 1px solid var(--border);
     border-radius: 4px;
     position:relative;
@@ -15,7 +16,7 @@
 }
 
 .h2 a{
-    color: black;
+    color: var(--color-font);
     font-weight: bold;
     text-decoration: none;
     
@@ -37,7 +38,7 @@
 .btnRed{
     margin: 4px 5px 0 0;
     padding: 6px 10px;
-    background: red;
+    background: var(--color-btn);
     border: none;
     border-radius: 3px;
     position: absolute;

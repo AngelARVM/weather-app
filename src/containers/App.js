@@ -1,17 +1,21 @@
 import React, {Fragment, useState} from 'react'
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, useHistory} from 'react-router-dom'
 import '../css/App.css';
+import '../css/global.css'
 import Nav from '../components/Nav'
-import Cards from '../components/Cards'
 import City from '../components/City'
+import Cards from '../components/Cards'
 import About from '../components/About'
+import { API_KEY } from '../config';
+
 
 
 function App() {
   const [cities, setCities] = useState([])
-  const apiKey = "c56858acc8d7a3be4849d5896038f853"
-
-
+  const [darkMode, setDarkMode] = useState(false)
+  const history = useHistory()
+  
+  const apiKey = API_KEY
   function onSearch(city) {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
@@ -34,6 +38,7 @@ function App() {
           alert('City is already on the panel')
         } else {
           setCities(oldCities => [...oldCities, newCity])
+          history.push("/")
         }
       } else {
         alert("City not found")
@@ -45,9 +50,12 @@ function App() {
     setCities(oldCities => oldCities.filter(city => city.id !== id))
   }
 
+  function onSwitch (){
+    setDarkMode(!darkMode)
+  }
+
   function onFilter(cityId) {
     let city = cities.filter(c => c.id === parseInt(cityId));
-    console.log('onFilter:', city)
     if(city.length > 0) {
         return city[0];
     } else {
@@ -57,20 +65,20 @@ function App() {
 
   return (
     <Fragment>
+      {console.log(apiKey)}
+      <div className={darkMode ? "darkMode" : ""}>
       <div className="App">
-        <Nav onSearch={onSearch}/>
-        
-        <Switch>
-          <Route exact path="/">
-            <Cards cities={cities} onClose={onClose}/>
-          </Route>
-          <Route exact path='/city/:id' render={({match}) => <City city={onFilter(match.params.id)}/>}/>
-          <Route>
-            <About exact path="/about" />
-          </Route>
-          
-        </Switch>
-
+        <Nav onSearch={onSearch} onSwitch={onSwitch} darkMode={darkMode}/>
+            <Switch>
+              <Route exact path="/">
+                <Cards cities={cities} onClose={onClose}/>
+              </Route>
+              <Route exact path='/city/:id' render={({match}) => <City city={onFilter(match.params.id)} darkMode={darkMode}/>}/>
+              <Route>
+                <About exact path="/about" darkMode={darkMode} />
+              </Route>
+            </Switch>
+          </div>
       </div>
     </Fragment>
   );

@@ -25,9 +25,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: linear-gradient(to right, green, blue) ;
+    background-image: linear-gradient(to right, white, whitesmoke) ;
     -webkit-transition: .4s;
     transition: .4s;
+    /* border: 2px solid black; */
 }
 
 .slider:before {
@@ -37,9 +38,10 @@
     width: 20px;
     left: 7px;
     bottom: 4px;
-    background-color: white;
+    background-color: gray;
     -webkit-transition: .4s;
     transition: .4s;
+    /* border: 2px solid gray; */
 }
 
 input[type="checkbox"]:checked + .slider {

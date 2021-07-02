@@ -1,5 +1,28 @@
-body{
+html{
     --border: rgba(172, 168, 168, 0.6);
     --border-btn: #c3cccc;
-    /* --border: red; */
+
+    --color-nav: rgba(182, 182, 182, 0.849);
+    --color-bg: whitesmoke;
+    --color-font: black ;
+    --color-sec: white;
+    --color-btn: red;
+}
+.darkMode{
+    --color-nav: #152028;;
+    --color-bg: hsl(208, 18%, 30%);
+    --color-font: whitesmoke ;
+    --color-sec: #152028;
+    --color-btn: whitesmoke;
+}
+
+body{
+    height: 100vh;
+    background: var(--color-bg);
+
+}
+
+
+#root{
+    height: 100vh;
 }
