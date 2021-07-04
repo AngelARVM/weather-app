@@ -16,7 +16,7 @@ function App() {
   
   const apiKey = REACT_APP_API_KEY
   function onSearch(city) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
     .then((data) => {
       if (data.main !== undefined){
