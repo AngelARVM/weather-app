@@ -1,13 +1,12 @@
 import React, {Fragment, useState} from 'react'
 import {Switch, Route, useHistory} from 'react-router-dom'
-import '../css/App.css';
-import '../css/global.css'
-import Nav from '../components/Nav'
-import City from '../components/City'
-import Cards from '../components/Cards'
-import About from '../components/About'
-import { API_KEY } from '../config';
-
+import './App.css';
+import './css/global.css'
+import Nav from './components/Nav'
+import City from './components/City'
+import Cards from './components/Cards'
+import About from './components/About'
+const {REACT_APP_API_KEY} = process.env
 
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(false)
   const history = useHistory()
   
-  const apiKey = API_KEY
+  const apiKey = REACT_APP_API_KEY
   function onSearch(city) {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
     .then(response => response.json())
