@@ -64,7 +64,6 @@ function App() {
 
   return (
     <Fragment>
-      {console.log(apiKey)}
       <div className={darkMode ? "darkMode" : ""}>
       <div className="App">
         <Nav onSearch={onSearch} onSwitch={onSwitch} darkMode={darkMode}/>
